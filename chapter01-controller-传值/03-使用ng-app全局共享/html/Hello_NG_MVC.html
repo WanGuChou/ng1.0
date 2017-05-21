@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>使用ng-app全局共享</title>
+</head>
+<body>
+<div ng-controller="Ctrl1">{{name}}<hr/>
+
+</div>
+<div  ng-controller="Ctrl2">
+    <p>{{name}}</p><hr/>
+</div>
+<script src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.value('data',{name:"zhangSan"})
+    app.controller("Ctrl1",function($scope,data){
+        $scope.name=data.name;
+    });
+    app.controller("Ctrl2",function($scope,data){
+        $scope.name=data.name;
+    })
+
+//说明在子级ctrl能够得到父级ctrl中的$scope,但父级不能得到子级的$scope
+
+</script>
+</body>
+</html>

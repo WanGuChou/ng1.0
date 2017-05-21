@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>使用事件传值</title>
+</head>
+<body>
+<div ng-controller="parentCtrl">
+    <div ng-controller="selfCtrl">
+        <button ng-click="click()">clcik</button>
+        <div ng-controller="childCtrl"></div>
+    </div>
+    <div ng-controller="broCtrl">
+    </div>
+</div>
+<script src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+
+    app.controller("selfCtrl", function ($scope) {
+        $scope.click=function(){
+            $scope.$emit("to-parent", "parent");//child->parent
+            $scope.$broadcast('to-child', 'child');//parenr->child
+        }
+    });
+    app.controller("parentCtrl", function ($scope) {
+        $scope.$on("to-parent", function (event, msg) {
+            console.log("parentCtrl", msg)
+        });
+        $scope.$on("to-child", function (event, msg) {
+            console.log("parentCtrl", msg)
+        });
+    });
+    app.controller("childCtrl", function ($scope) {
+        $scope.$on("to-parent", function (event, msg) {
+            console.log("childCtrl", msg)
+        });
+        $scope.$on("to-child", function (event, msg) {
+            console.log("childCtrl", msg)
+        });
+    });
+    app.controller("broCtrl", function ($scope) {
+        $scope.$on("to-parent", function (event, msg) {
+            console.log("broCtrl", msg)
+        });
+        $scope.$on("to-child", function (event, msg) {
+            console.log("broCtrl", msg)
+        });
+    });
+</script>
+</body>
+</html>

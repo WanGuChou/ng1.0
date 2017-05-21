@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>子级和父级的数据共享</title>
+</head>
+<body>
+<div  ng-controller="parentCtrl">
+    <p>{{parent.name}}</p><hr/>
+    1{{child.name}}1
+    <div ng-controller="childCtrl">{{child.name}}<hr/>
+        <button ng-click = "gerParentValue()">click</button>
+    </div>
+
+</div>
+<script src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller("parentCtrl",function($scope){
+        $scope.parent={
+            name:"zhangSan"
+        };
+    });
+    app.controller("childCtrl",function($scope){
+        $scope.child={
+            name:"zhangSi"
+        };
+        $scope.gerParentValue=function(){
+            alert($scope.parent.name)
+        }
+    })
+
+//说明在子级ctrl能够得到父级ctrl中的$scope,但父级不能得到子级的$scope
+
+</script>
+</body>
+</html>

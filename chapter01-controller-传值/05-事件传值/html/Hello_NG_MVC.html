@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>使用事件传值</title>
+</head>
+<body>
+<div ng-controller="parentCtrl">
+    parentCtrl<hr/>
+    <div ng-controller="childCtrl1">
+
+        childCtrl1 <input type="text" ng-model="ctrl1_name" ng-change="change(ctrl1_name)"/>
+        <hr/>
+
+    </div>
+    <div  ng-controller="childCtrl2">
+        childCtrl2<input type="text" ng-model="ctrl2_name"/>
+
+        <hr/>
+    </div>
+</div>
+<script src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+
+    app.controller("parentCtrl",function($scope){
+        $scope.$on("childCtrl1ChangeName",function(event,msg){
+            $scope.$broadcast("parentSendMsg",msg);//将信息传给子ctrl
+        })
+    });
+    app.controller("childCtrl1",function($scope){
+        $scope.change=function(name){
+            $scope.$emit("childCtrl1ChangeName", name);//将信息传递给父controller
+        }
+    });
+    app.controller("childCtrl2",function($scope){
+        $scope.$on("parentSendMsg",function(event,msg){
+            $scope.ctrl2_name=msg;
+        })
+    })
+
+    //说明在子级ctrl能够得到父级ctrl中的$scope,但父级不能得到子级的$scope
+
+</script>
+</body>
+</html>

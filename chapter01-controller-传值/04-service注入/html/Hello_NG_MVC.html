@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>使用service注入</title>
+</head>
+<body>
+
+<div ng-controller="Ctrl1" >
+    <p>{{name}}</p><hr/>
+    <button ng-click="change()">click</button><hr/>
+
+</div>
+<div  ng-controller="Ctrl2">
+
+    <p>{{name}}</p><hr/>
+</div>
+    </div>
+<script src="../js/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+
+    app.factory("MyService",function () {
+       var service={
+           name:"tom"
+       };
+       return service;
+    }
+    );
+    app.controller("Ctrl1",function($scope,MyService){
+        $scope.name=MyService.name;
+        $scope.change=function () {
+            $scope.name="12"
+            MyService.name="ACheng";
+        }
+    });
+    app.controller("Ctrl2",function($scope,MyService){
+        $scope.name=MyService.name;
+    })
+
+//说明在子级ctrl能够得到父级ctrl中的$scope,但父级不能得到子级的$scope
+
+</script>
+</body>
+</html>
