@@ -1,0 +1,24 @@
+
+    1.$scope是一个POJO
+    2.$scope提供了一些工具方法$watch()/$apply()
+    3.$scope是表达式的执行环境
+    4.$scope是树形结构，平行于DOM
+    5.子$scope对象会继承父$scope的属性和方法
+    6.一个ng-app 一个$rootScope
+    7.$scope可以传播事件，$emit(向上) / $broadcast向下
+    8.$scope不仅是MVC的基础，也是双向绑定的基础
+    9.使用angluar.element($0).scope调试
+
+    ===========================================
+
+$scope 生命周期
+creation 创建
+watcher registration 注册监控
+model mutation  模型变化 发出事件
+mutation observation  事件观察
+scope destrution  销毁
+
+
+
+
+
