@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>路由配置</title>
+    <script src="framework/angular.js"></script>
+    <script src="framework/angular-animate.js"></script>
+    <script src="framework/angular-route.js"></script>
+    <script>
+        angular.module('bookStoreApp', ['ngRoute', 'ngAnimate'])
+                .config(function ($routeProvider) {
+                    $routeProvider.when('/hello', {
+                        templateUrl: 'tlps/hello.html',
+                        controller: 'HelloCtrl'
+                    }).when('/list', {
+                        templateUrl: 'tlps/bookList.html',
+                        controller: 'BookListCtrl'
+                    }).otherwise({
+                        redirectTo: '/hello'
+                    })
+                })
+                .controller("HelloCtrl", ['$scope', function ($scope) {
+                    $scope.name = "angularJS"
+                }])
+
+                .controller("BookListCtrl", ['$scope', function ($scope) {
+                    $scope.books = [{title: "java", author: "James Gosling"}, {
+                        title: "angularJS",
+                        author: "Misko Hevery"
+                    }];
+                }]);
+    </script>
+</head>
+<body ng-app="bookStoreApp">
+<a href="#!/index">toIndex</a>
+<a href="#!/list">toIndex</a>
+<hr/>
+<div ng-view>
+
+</div>
+</body>
+
+
+</html>
