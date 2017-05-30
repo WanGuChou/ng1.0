@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+</head>
+<!--
+{{greeting.name}}
+
+    的效果等同于
+
+    <span data-ng-bind="greeting.name"/>
+     或者
+    <span ng-bind="greeting.name"/>
+
+两者的区别是：前者在加载速度比较慢，或者刷新的时候后出现{{greeting.name}}的字样，后者不会
+范围：后者适用于主页面的加载
+      前者适用于模板
+-->
+<body ng-controller="myCtrl">
+    {{greeting.name}}
+    <hr/>
+    <span data-ng-bind="greeting.name"/>
+</body>
+<script src="../js/angular.js"></script>
+<script src="../js/myController.js" type="text/javascript"></script>
+</html>

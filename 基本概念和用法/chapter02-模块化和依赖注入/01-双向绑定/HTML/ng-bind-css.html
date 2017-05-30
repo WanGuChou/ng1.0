@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type='text/css'>
+
+    <script src="../js/angular.js"></script>
+    <style>
+       .text-blue{
+      background-color: #2196F3;
+       }
+.text-red{
+    background-color: #b92c28;
+
+}
+
+    </style>
+</head>
+<body ng-app="cssApp">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">双向数据绑定</div>
+    </div>
+    <div class="panel-body" ng-controller="cssCtrl">
+        <p class="text-{{color}}">css样式</p>
+        <button ng-click="change()">clickMe</button>
+    </div>
+
+</div>
+</body>
+<script>
+    angular.module('cssApp',[]).controller('cssCtrl',function ($scope) {
+        $scope.color="blue";
+        $scope.change=function () {
+
+            $scope.color="red";
+        }
+
+    })
+    
+    
+</script>
+</html>

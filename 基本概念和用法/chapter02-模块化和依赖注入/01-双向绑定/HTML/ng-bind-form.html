@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type='text/css'>
+
+    <script src="../js/angular.js"></script>
+</head>
+<body ng-app="formApp">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">双向数据绑定</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+         <form class="form-horizontal" ng-controller="formCtrl">
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label ">邮箱</label>
+                    <div class="col-sm-4">
+                        <input  type="email" class="form-control" placeholder="请输入邮箱" ng-model="user.email"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label " >密码</label>
+                    <div class="col-sm-4">
+                        <input  type="password" class="form-control" placeholder="请输入密码" ng-model="user.password"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+
+                        <div class="checkbox"><label>
+                            <input type="checkbox" ng-model="user.remberme">自动登录
+                        </label>
+                        </div>
+
+                    </div>
+
+                </div>
+             <button class="col-sm-offset-2 col-sm-10 btn" data-ng-click="submit()">提交</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    angular.module('formApp',[]).controller('formCtrl',function ($scope) {
+        $scope.user={
+            email:"123@123.com",
+            password:"123456",
+            remberme:true
+        };
+        $scope.submit=function () {
+           console.log( $scope.user)
+        }
+    })
+    
+    
+</script>
+</html>
