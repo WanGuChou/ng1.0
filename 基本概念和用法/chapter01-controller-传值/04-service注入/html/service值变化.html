@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>使用service注入</title>
+</head>
+<body>
+<fieldset>
+    <legend>
+        ctrl1
+    </legend>
+    <div ng-controller="Ctrl1"  >
+        <p>{{person1.name}}</p>
+
+        <button ng-click="change()">click</button>
+
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>
+        ctrl2
+    </legend>
+<div ng-controller="Ctrl2" >
+
+    <p>{{person2.name}}</p>
+    <p>{{person3.name}}</p>
+</div>
+</fieldset>
+</body>
+<script src="../js/angular.min.js"></script>
+<script>
+
+    var app = angular.module('myApp', []);
+
+    app.factory("MyService", function () {
+                var service = {};
+                service.person = {
+                    name: "tom"
+                };
+                return service;
+            }
+    );
+    app.controller("Ctrl1", function ($scope, MyService) {
+        $scope.person1 = MyService.person;
+        $scope.change = function () {
+            MyService.person.name = "ACheng";
+        };//1.
+    });
+    app.controller("Ctrl2", function ($scope, MyService) {
+        $scope.person2 = MyService.person;//2.会跟随   1事件变化而现实在页面上
+        $scope.person3 ={name:MyService.person.name};//3.不会 随 1事件变化而现实在页面上，
+    });
+</script>
+</body>
+</html>
